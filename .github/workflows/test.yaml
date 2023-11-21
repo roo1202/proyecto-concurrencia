@@ -1,0 +1,14 @@
+name: Evaluación Automática
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Compilar proyecto
+        run: make
+      - name: Ejecutar pruebas
+        run: bin/test
