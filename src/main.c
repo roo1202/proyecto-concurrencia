@@ -47,7 +47,7 @@ void *insert_worker(void *arg)
     for (int i = 0; i < input->times; ++i)
     {
         int size = size_list(the_list);
-        int pos = rand() % size;
+        int pos = rand() % (size + 1);
         if (insert_list(the_list, pos, input->value) != 0)
         {
             correct_insert = 0;
@@ -116,7 +116,7 @@ void *remove_worker(void *arg)
     for (int i = 0; i < input->times; ++i)
     {
         int size = size_list(the_list);
-        int pos = rand() % size;
+        int pos = rand() % (size + 1);
         int value;
         if (remove_list(the_list, pos, &value) == 0)
         {
@@ -184,7 +184,7 @@ void *index_worker(void *arg)
     for (int i = 0; i < input->times; ++i)
     {
         int size = size_list(the_list);
-        int pos = rand() % size;
+        int pos = rand() % (size + 1);
         int value;
         if (index_list(the_list, pos, &value) != 0)
         {
