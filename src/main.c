@@ -186,9 +186,12 @@ void *index_worker(void *arg)
         int size = size_list(the_list);
         int pos = rand() % (size + 1);
         int value;
-        if (index_list(the_list, pos, &value) != 0)
+        if (index_list(the_list, pos, &value) == 0)
         {
-            correct_index = 0;
+            if (value < 0 || value > MAX_NUM)
+            {
+                correct_index = 0;
+            }
         }
     }
     return NULL;

@@ -18,7 +18,7 @@ Adicionalmente cualquier dato adicional contenido dentro de la estructura de la 
 ### Especificaciones
 
 1. Todas las funciones, con excepción de `size_list`, devuelven un entero el cual significa si la ejecución de dicha función fue exitosa o no.
-2. El valor devuelto por las funciones `index_list` y `remove_list` de acuerdo a su lógica se realizará mediante el 3er argumento.
+2. El valor devuelto por las funciones `index_list` y `remove_list` de acuerdo a su lógica se realizará mediante el 3er argumento. En caso de ser vacía la lista estas deberán retornar 1.
 3. Ninguna de las funciones que utilizan índices puede fallar por índices inválidos. Si el índice se encuentra fuera de los rangos actuales se considerará el mismo como si fuera el mayor valor que sí pertenezca al rango. O sea, 0 si el índice es negativo, la longitud menos 1 de la lista si el índice es mayor que la longitud en ese momento.
 4. Todos los cambios en el proyecto deben limitarse a los archivos antes mencionados. No existe necesidad de realizar ningún cambio en otro lugar.
 
