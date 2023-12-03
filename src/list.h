@@ -11,11 +11,11 @@ typedef struct _integer_linked_list_t
 } int_ll_t;
 
 // Integer Node
-typedef struct Node{
+typedef struct int_node_t{
     int data;
-    struct Node* next;
+    struct int_node_t* next;
     pthread_mutex_t mutex;
-}int_node_t;
+};
 
 // Init list structure
 int init_list(int_ll_t *list);

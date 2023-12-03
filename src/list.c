@@ -14,19 +14,22 @@ int init_list(int_ll_t *list)
 // Free list structure
 int free_list(int_ll_t *list)
 {
-    struct int_node_t* current = list->head;
+    pthread_mutex_lock(&list->list_mutex);
+    struct int_node_t* current = list -> head;
     while(current != NULL)
     {
-        pthread_mutex_lock(&current->mutex);
+        pthread_mutex_lock(&current -> mutex);
         struct int_node_t* temp = current;
         current = current->next;
+        pthread_mutex_unlock(&temp->mutex);
+        pthread_mutex_destroy(&temp->mutex);
         free(temp);
     }
+    pthread_mutex_unlock(&list->list_mutex);
     pthread_mutex_destroy(&list->list_mutex);
     free(list);
     return 0;
 }
-
 // Get list size
 int size_list(int_ll_t *list)
 {
@@ -50,13 +53,13 @@ int index_list(int_ll_t *list, int index, int *out_value)
     if(index < 0) {
         index = 0;
     }
+    int count = 0;
+    pthread_mutex_lock(&list->list_mutex);
     int size = size_list(&list);
     if(index > size - 1 && size > 0)
     {
         index = size - 1;
     }
-    int count = 0;
-    pthread_mutex_lock(&list->list_mutex);
     struct int_node_t* current = list->head;
     while(current != NULL)
     {
@@ -82,12 +85,12 @@ int insert_list(int_ll_t *list, int index, int value)
     if(index < 0) {
         index = 0;
     }
+    pthread_mutex_lock(&list->list_mutex);
     int size = size_list(&list);
     if(index > size - 1 && size > 0)
     {
         index = size - 1;
     }
-    pthread_mutex_lock(&list->list_mutex);
     struct int_node_t* current = list->head;
     struct int_node_t* previous = NULL;
     int count = 0;
@@ -128,12 +131,12 @@ int remove_list(int_ll_t *list, int index, int *out_value)
     if(index < 0) {
         index = 0;
     }
+    pthread_mutex_lock(&list->list_mutex);
     int size = size_list(&list);
     if(index > size - 1 && size > 0)
     {
         index = size - 1;
     }
-    pthread_mutex_lock(&list->list_mutex);
     struct int_node_t* current = list->head;
     struct int_node_t* previous = NULL;
     int count = 0;
