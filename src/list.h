@@ -8,6 +8,7 @@ typedef struct _integer_linked_list_t
 {
     struct int_node_t* head;
     pthread_mutex_t list_mutex;
+    int size;
 } int_ll_t;
 
 // Integer Node
